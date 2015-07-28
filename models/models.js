@@ -36,11 +36,26 @@ sequelize.sync().then(function(){
   Quiz.count().then(function(count){
     if (count===0) {   //la tabla se inicializa solo si está vacía
       Quiz.create({ pregunta: 'Capital de Italia',
-                    respuesta: 'Roma'
+                    respuesta: 'Roma',
+                    tema: 'otro'
                   });
       Quiz.create({ pregunta: 'Capital de Portugal',
-                    respuesta: 'Lisboa'
+                    respuesta: 'Lisboa',
+                    tema: 'otro'
+                  });
+      Quiz.create({ pregunta: '¿Cuál es el planeta más grande de nuestro sistema solar?',
+                    respuesta: 'Júpiter',
+                    tema: 'ciencia'
+                  });
+      Quiz.create({ pregunta: 'En "Alicia en el país de las Maravillas", ¿de qué color estaban pintando los jardineros las rosas?',
+                    respuesta: 'Rojo',
+                    tema: 'humanidades'
+                  });
+      Quiz.create({ pregunta: '¿En qué año se grabó la serie "Verano Azul"?',
+                    respuesta: '1978',
+                    tema: 'ocio'
                   })
+
       .then(function(){console.log('Base de datos inicializada')});
     };
   });
