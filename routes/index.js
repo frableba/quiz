@@ -33,7 +33,7 @@ router.get('/author',function(req, res) {
 });
 
 // Definición de rutas de comentarios
-router.get('/quizes/:quizId(\\d+)/comments/new',  commentcontroller.new);
+router.get('/quizes/:quizId(\\d+)/comments/new',  commentController.new);
 router.post('/quizes/:quizId(\\d+)/comments',     commentController.create);
 router.get('/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish', sessionController.loginRequired, commentController.publish);
 // el anterior debería ser PUT porque modifica un campo
