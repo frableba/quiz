@@ -40,6 +40,23 @@ app.use(function(req, res, next) {
   next();
 });
 
+// Caducidad de sesión
+app.use(function(req, res, next) {
+  if (req.session.user) { //Existe sesión del usuario
+    if (!req.session.lastInteraction){ //Primera interacción estando logueado
+      req.session.lastInteraction= Date.now();
+    } else {  //Nueva interacción. Se comprueba si han pasado los dos minutos
+      if ((Date.now() - req.session.lastInteraction) > 2*60*1000){
+        delete req.session.user;//req.session.destroy();    //Cierra sesión
+        req.session.lastInteraction=null; //Resetea la última interacción
+      } else {
+        req.session.lastInteraction= Date.now(); //Vuelven a empezar los dos minutos
+      }
+    }
+  }
+  next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
